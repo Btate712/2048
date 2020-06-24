@@ -1,5 +1,19 @@
-.board {
+/* reset */
+* { 
+  box-sizing: border-box;
+}
+
+#board {
+  display: flex;
+  flex-wrap: wrap;
   width: 400px;
   height: 400px;
-  background: blue;
+}
+
+.tile {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: white;
+  border: 1px solid black;
 }
