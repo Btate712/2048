@@ -10,7 +10,25 @@ function createGame() {
     newTile.id = `tile${i}`;
     board.appendChild(newTile);
   }
+
+  makeNewTile();
+  makeNewTile();
+}
+
+function makeNewTile() {
+  const newTileIndex = Math.floor(Math.random() * WIDTH * WIDTH);
+
+  newTile = document.getElementById(`tile${newTileIndex}`);
+  console.log(newTile.innerHTML);
+  if (!parseInt(newTile.innerHTML)) {
+    newTile.innerHTML = getNewTileValue();
+  } else {
+    makeNewTile();
+  }
+}
+
+function getNewTileValue() {
+  return Math.random() >= 0.9 ? "4" : "2";
 }
 
 createGame();
-console.log(board);
