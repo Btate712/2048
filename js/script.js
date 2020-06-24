@@ -4,15 +4,22 @@ const COLORS = {
   4: "blue"
 }
 
-const board = document.getElementById("board");
+const newRow = new Array(WIDTH);
+newRow.fill(0);
+const board = new Array(WIDTH);
+board.fill(newRow);
+
+const boardElement = document.getElementById("board");
 
 function createGame() {
   for(let i = 0; i < WIDTH * WIDTH; i++) {
+    const row = parseInt(i / WIDTH);
+    const col = i % WIDTH;
     newTile = document.createElement("div");
-    newTile.innerHTML = "0";
+    newTile.innerHTML = board[row][col];
     newTile.className = "tile";
     newTile.id = `tile${i}`;
-    board.appendChild(newTile);
+    boardElement.appendChild(newTile);
   }
 
   makeNewTile();
@@ -23,9 +30,13 @@ function createGame() {
 function makeNewTile() {
   const newTileIndex = Math.floor(Math.random() * WIDTH * WIDTH);
 
-  newTile = document.getElementById(`tile${newTileIndex}`);
-  if (!parseInt(newTile.innerHTML)) {
-    newTile.innerHTML = getNewTileValue();
+  const newTileRow = parseInt(newTileIndex / WIDTH);
+  const newTileCol = parseInt(newTileIndex % WIDTH);
+
+  if (!board[newTileRow][newTileCol]) {
+    board[newTileRow][newTileCol] = getNewTileValue();
+    newTile = document.getElementById(`tile${newTileIndex}`);
+    newTile.innerHTML = board[newTileRow][newTileCol];
   } else {
     makeNewTile();
   }
@@ -39,7 +50,6 @@ function setColors() {
 
   for (let i = 0; i < WIDTH * WIDTH; i++) {
     tile = document.getElementById(`tile${i}`);
-    console.log(COLORS[parseInt(tile.innerHTML)])
     tile.style.background = COLORS[parseInt(tile.innerHTML)];
   }
 }
