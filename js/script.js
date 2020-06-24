@@ -17,6 +17,7 @@ function createGame() {
 
   makeNewTile();
   makeNewTile();
+  setColors();
 }
 
 function makeNewTile() {
@@ -43,5 +44,12 @@ function setColors() {
   }
 }
 
+function setupEventListeners() {
+  document.addEventListener("keydown", event => {
+    console.log(event);
+  });
+}
+
 createGame();
-setColors();
+setupEventListeners();
+
