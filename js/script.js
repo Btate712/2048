@@ -46,8 +46,15 @@ function setColors() {
 
 function setupEventListeners() {
   document.addEventListener("keydown", event => {
-    console.log(event);
+    if(/^Arrow/.test(event.key)) {
+      const moveDirection = event.key.slice(5);
+      move(moveDirection);
+    }
   });
+}
+
+function move(direction) {
+  console.log(direction);
 }
 
 createGame();
