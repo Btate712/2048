@@ -116,7 +116,6 @@ function move(direction) {
           }
           if(board[row][col] !== 0) {
             let tempCol = col;
-            console.log(`moving element at ${row},${col} right`)
             // move right until a non-zero number or right edge is encountered
             while(tempCol < WIDTH - 1 && board[row][tempCol + 1] === 0) {
               board[row][tempCol + 1] = board[row][tempCol];
@@ -137,7 +136,6 @@ function move(direction) {
           }
           if(board[row][col] !== 0) {
             let tempCol = col;
-            console.log(`moving element at ${row},${col} left`)
             // move right until a non-zero number or left edge is encountered
             while(tempCol >= 0 && board[row][tempCol - 1] === 0) {
               board[row][tempCol - 1] = board[row][tempCol];
@@ -149,7 +147,6 @@ function move(direction) {
       }
       break;
       case 'Up':
-        console.log("moving up...");
         // move up 
         for(let col = 0; col < WIDTH; col++) {
           for(let row = 1; row < WIDTH; row++) {
@@ -160,7 +157,6 @@ function move(direction) {
             }
             if(board[row][col] !== 0) {
               let tempRow = row;
-              console.log(`moving element at ${row},${col} up`)
               // move up until a non-zero number or top is encountered
               while(tempRow > 0 && board[tempRow - 1][col] === 0) {
                 board[tempRow - 1][col] = board[tempRow][col];
@@ -172,7 +168,6 @@ function move(direction) {
         }
       break;
     case 'Down':
-      console.log("moving down...");
       // move down 
       for(let col = 0; col < WIDTH; col++) {
         for(let row = WIDTH - 2; row >= 0; row--) {
@@ -183,7 +178,6 @@ function move(direction) {
           }
           if(board[row][col] !== 0) {
             let tempRow = row;
-            console.log(`moving element at ${row},${col} down`)
             // move down until a non-zero number or bottom is encountered
             while(tempRow < WIDTH - 1 && board[tempRow + 1][col] === 0) {
               board[tempRow + 1][col] = board[tempRow][col];
