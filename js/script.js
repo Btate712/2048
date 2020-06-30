@@ -21,6 +21,18 @@ for (let i = 0; i < WIDTH; i++) {
 
 const boardElement = document.getElementById("board");
 
+function reset() {
+  gameOver = false;
+  for (let row = 0; row < WIDTH; row ++) {
+    for (let col = 0; col < WIDTH; col++) {
+      board[row][col] = 0;
+    }
+  }
+
+  makeNewTile();
+  makeNewTile();
+}
+
 function createGame() {
   for(let i = 0; i < WIDTH * WIDTH; i++) {
     const row = parseInt(i / WIDTH);
