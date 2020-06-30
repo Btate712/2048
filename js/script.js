@@ -16,15 +16,18 @@ const COLORS = {
   8192: "#ffff4d"
 }
 
+const board = new Array(WIDTH);
+const boardDisplayElement = document.getElementById("board");
+
 let gameOver = false;
 
 // initialize board to two-dimensional array of zeros
-const board = new Array(WIDTH);
-for (let i = 0; i < WIDTH; i++) {
-  board[i] = new Array(WIDTH).fill(0);
+function initializeBoard() {
+  for (let i = 0; i < WIDTH; i++) {
+    board[i] = new Array(WIDTH).fill(0);
+  }
 }
 
-const boardElement = document.getElementById("board");
 
 function reset() {
   gameOver = false;
@@ -39,17 +42,21 @@ function reset() {
 }
 
 function createGame() {
+  setupBoardDisplay();
+  initializeBoard();
+  makeNewTile();
+  makeNewTile();
+}
+
+function setupBoardDisplay() {
   for(let i = 0; i < WIDTH * WIDTH; i++) {
     const row = parseInt(i / WIDTH);
     const col = i % WIDTH;
     const newTile = document.createElement("div");
     newTile.className = "tile";
     newTile.id = `tile${row},${col}`;
-    boardElement.appendChild(newTile);
+    boardDisplayElement.appendChild(newTile);
   }
-
-  makeNewTile();
-  makeNewTile();
 }
 
 function redrawBoard() {
