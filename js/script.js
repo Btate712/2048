@@ -121,23 +121,68 @@ function setupEventListeners() {
   document.addEventListener("keydown", event => {
     if(/^Arrow/.test(event.key) && !gameOver) {
       const moveDirection = event.key.slice(5);
-      move(moveDirection);
+      slide(moveDirection);
     }
   });
 }
 
-function move(direction) {
-  // to do: check for additive collapse
-  // move all tiles in the specified direction
+function slide(direction) {
+  collapse(direction);
+  move(direction);
+  makeNewTile();
+  redrawBoard();
+}
+
+function collapse(direction) {
   switch(direction) {
     case 'Right':
-      for(let row = 0; row < WIDTH; row++) {
-        for(let col = WIDTH - 2; col >= 0; col--) {
-          // check for additive collapse 
+      for (let row = 0; row < WIDTH; row++) {
+        for (let col = WIDTH - 2; col >= 0; col--) {
           if(board[row][col] != 0 && board[row][col] == board[row][col + 1]) {
             board[row][col] = 0;
             board[row][col + 1] *= 2;
           }
+        }
+      }
+      break;
+    case 'Left':
+      for(let row = 0; row < WIDTH; row++) {
+        for(let col = 1; col < WIDTH; col++) {
+          if(board[row][col] != 0 && board[row][col] == board[row][col - 1]) {
+            board[row][col] = 0;
+            board[row][col - 1] *= 2;
+          }
+        }
+      }
+      break;
+    case 'Up':
+      for(let col = 0; col < WIDTH; col++) {
+        for(let row = 1; row < WIDTH; row++) {
+          if(board[row][col] != 0 && board[row][col] == board[row - 1][col]) {
+            board[row][col] = 0;
+            board[row - 1][col] *= 2;
+          }
+        }
+      }
+      break;
+    case 'Down':
+      for(let col = 0; col < WIDTH; col++) {
+        for(let row = WIDTH - 2; row >= 0; row--) {
+          if(board[row][col] != 0 && board[row][col] == board[row + 1][col]) {
+            board[row][col] = 0;
+            board[row + 1][col] *= 2;
+          }
+        }
+      }
+      break;
+  }
+}
+
+function move(direction) {
+  switch(direction) {
+    case 'Right':
+      for(let row = 0; row < WIDTH; row++) {
+        for(let col = WIDTH - 2; col >= 0; col--) {
           if(board[row][col] !== 0) {
             let tempCol = col;
             // move right until a non-zero number or right edge is encountered
@@ -150,56 +195,39 @@ function move(direction) {
         }
       }
       break;
-    case 'Left':
-      for(let row = 0; row < WIDTH; row++) {
-        for(let col = 1; col < WIDTH; col++) {
-          // check for additive collapse 
-          if(board[row][col] != 0 && board[row][col] == board[row][col - 1]) {
-            board[row][col] = 0;
-            board[row][col - 1] *= 2;
-          }
-          if(board[row][col] !== 0) {
-            let tempCol = col;
-            // move right until a non-zero number or left edge is encountered
-            while(tempCol >= 0 && board[row][tempCol - 1] === 0) {
-              board[row][tempCol - 1] = board[row][tempCol];
-              board[row][tempCol] = 0;
-              tempCol--;
-            }
-          }
-        }
-      }
-      break;
-      case 'Up':
-        // move up 
-        for(let col = 0; col < WIDTH; col++) {
-          for(let row = 1; row < WIDTH; row++) {
-            // check for additive collapse 
-            if(board[row][col] != 0 && board[row][col] == board[row - 1][col]) {
-              board[row][col] = 0;
-              board[row - 1][col] *= 2;
-            }
+      case 'Left':
+        for(let row = 0; row < WIDTH; row++) {
+          for(let col = 1; col < WIDTH; col++) {
             if(board[row][col] !== 0) {
-              let tempRow = row;
-              // move up until a non-zero number or top is encountered
-              while(tempRow > 0 && board[tempRow - 1][col] === 0) {
-                board[tempRow - 1][col] = board[tempRow][col];
-                board[tempRow][col] = 0;
-                tempRow--;
+              let tempCol = col;
+              // move right until a non-zero number or left edge is encountered
+              while(tempCol >= 0 && board[row][tempCol - 1] === 0) {
+                board[row][tempCol - 1] = board[row][tempCol];
+                board[row][tempCol] = 0;
+                tempCol--;
               }
             }
           }
         }
       break;
+    case 'Up':
+      for(let col = 0; col < WIDTH; col++) {
+        for(let row = 1; row < WIDTH; row++) {
+          if(board[row][col] !== 0) {
+            let tempRow = row;
+            // move up until a non-zero number or top is encountered
+            while(tempRow > 0 && board[tempRow - 1][col] === 0) {
+              board[tempRow - 1][col] = board[tempRow][col];
+              board[tempRow][col] = 0;
+              tempRow--;
+            }
+          }
+        }
+      }
+      break;
     case 'Down':
-      // move down 
       for(let col = 0; col < WIDTH; col++) {
         for(let row = WIDTH - 2; row >= 0; row--) {
-          // check for additive collapse 
-          if(board[row][col] != 0 && board[row][col] == board[row + 1][col]) {
-            board[row][col] = 0;
-            board[row + 1][col] *= 2;
-          }
           if(board[row][col] !== 0) {
             let tempRow = row;
             // move down until a non-zero number or bottom is encountered
@@ -211,10 +239,9 @@ function move(direction) {
           }
         }
       }
-    break;
+      break;
   }
-  makeNewTile();
-  redrawBoard();
+
 }
 
 function getScore() {
