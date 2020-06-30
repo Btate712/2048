@@ -1,14 +1,16 @@
 /* reset */
 * { 
   box-sizing: border-box;
+  font-family: "Arial";
 }
 
 h1 {
+  color: lightblue;
   text-align: center;
 }
 
 body {
-  background-color: gray;
+  background-color: #333;
 }
 
 #board {
@@ -39,8 +41,8 @@ body {
 #reset-button {
   display: block;
   margin: auto;
-  height: 2em;
+  height: 4em;
   width: 10em;
-  background: pink;
+  background: lightblue;
   border-radius: 10px; 
 }

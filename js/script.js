@@ -1,14 +1,19 @@
 const WIDTH = 4;
 const COLORS = {
-  0: "white",
-  2: "red",
-  4: "blue",
+  0: "#ddd",
+  2: "#99c2ff",
+  4: "#39e600",
   8: "yellow",
-  16: "green",
+  16: "#ff8533",
   32: "orange",
   64: "violet",
   128: "pink",
-  256: "skyblue"
+  256: "#d5ff80",
+  512: "#ff66ff",
+  1024: "#66d9ff",
+  2048: "#ff5c33",
+  4096: "#4dffd2",
+  8192: "#ffff4d"
 }
 
 let gameOver = false;
@@ -84,7 +89,7 @@ function makeNewTile() {
       makeNewTile();
     }
   } else {
-    alert("Game Over!");
+    alert(`Game Over!\nFinal Score: ${getScore()}`);
   }
 }
 
@@ -203,6 +208,16 @@ function move(direction) {
   }
   makeNewTile();
   redrawBoard();
+}
+
+function getScore() {
+  let score = 0;
+  for (let row = 0; row < WIDTH; row++) {
+    for (let col = 0; col < WIDTH; col++) {
+      score += parseInt(board[row][col]);
+    }
+  }
+  return score;
 }
 
 createGame();
