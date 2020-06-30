@@ -3,7 +3,16 @@
   box-sizing: border-box;
 }
 
+h1 {
+  text-align: center;
+}
+
+body {
+  background-color: gray;
+}
+
 #board {
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
   width: 400px;
@@ -20,4 +29,18 @@
   text-align: center;
   padding-top: 29px;
   border-radius: 10px;
+}
+
+#button-container {
+  margin: auto;
+  padding-top: 20px;
+}
+
+#reset-button {
+  display: block;
+  margin: auto;
+  height: 2em;
+  width: 10em;
+  background: pink;
+  border-radius: 10px; 
 }
