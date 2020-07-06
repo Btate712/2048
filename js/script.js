@@ -127,6 +127,7 @@ function setupEventListeners() {
 }
 
 function slide(direction) {
+  move(direction);
   collapse(direction);
   move(direction);
   makeNewTile();

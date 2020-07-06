@@ -59,4 +59,13 @@ body {
     padding-top: 10px;
     font-size: 1.25em;
   }
+
+  h1 {
+    font-size: 1.25em;
+  }
+
+  #reset-button {
+    height: 2em;
+    width: 7.5em;
+  }
 }
