@@ -19,6 +19,7 @@ body {
   flex-wrap: wrap;
   width: 400px;
   height: 400px;
+  margin-bottom: 1em;
 }
 
 .tile {
@@ -47,6 +48,39 @@ body {
   border-radius: 10px; 
 }
 
+.instructions {
+  color: #39f;
+  max-width: 70vw;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+
+.direction-buttons {
+  display: block;
+  font-size: 2em;
+  margin: auto;
+  width: 80vw;
+  text-align: center;
+}
+
+.up button, .down button {
+  padding: 5px 15px;
+}
+
+.up button, .down button, .left-right button {
+  font-size: 1em;
+  margin: auto 0;
+}
+
+.right-button {
+  margin-left: 3em;
+}
+
+.hide-mobile {
+  display: none;
+}
+
 @media (max-height: 600px) {
   #board {
     width: 200px;
@@ -65,7 +99,12 @@ body {
   }
 
   #reset-button {
-    height: 2em;
+    font-size: 0.5em;
+    height: 4em;
     width: 7.5em;
+  }
+
+  .instructions {
+    width: 100vw;
   }
 }

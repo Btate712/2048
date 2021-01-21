@@ -11,6 +11,14 @@
     <h1>2048 Game Clone</h1>
     <div id="board">
     </div>
+    <div class="direction-buttons" id="mobile-buttons">
+      <div class="up" onclick="slide('Up')"><button>&uarr;</button></div>
+      <div class="left-right">
+        <button onclick="slide('Left')">&larr;</button>
+        <button class="right-button" onclick="slide('Right')">&rarr;</button>
+      </div>
+      <div class="down" onclick="slide('Down')"><button>&darr;</button></div>
+    </div>
     <div id="button-container">
       <button id="reset-button" onclick="reset()">Reset Game</button>
     </div>
